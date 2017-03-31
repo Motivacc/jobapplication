@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   public submitted: boolean;
   public applicants: HOME[]= [];
   public data: string;
-  public id: string;
+  public id: 0;
   public title: string;
 
   applicant = new HOME();
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params["id"];
     })
-    if (this.id > '') { 
+    if (this.id > 0) { 
             this.title = "Edit Material"
         } else {
             this.title = "Add Material"
@@ -44,6 +44,17 @@ export class HomeComponent implements OnInit {
         if (!this.id) {
             return;
         }
+
+        this._hService.getAllApplicants().subscribe(
+          applicants => {
+            this.applicants = applicants
+
+            let Form = (this.applicantForm)
+            if (this.id > 0) {
+              (<FormGroup>this.applicantForm).setValue(applicants, { onlySelf: false});
+            }
+          }
+        )
      
   }
 
@@ -66,12 +77,12 @@ export class HomeComponent implements OnInit {
     let result;
       this._hService.addApplicants(model).subscribe(
         data => {
-          if(data === '') {
+          if(data === 0) {
             this.data = data;
           }
         }
       )
-    console.log('post de aplicantes ...');
+    console.log('Applicacion Enviada Exitorsamente!!! ...');
   }
 
 }

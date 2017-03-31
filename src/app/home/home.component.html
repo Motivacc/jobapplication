@@ -18,13 +18,13 @@
             <h3 >Job Application</h3>
           </div> 
           <div class="panel-body">
-            <form (ngSubmit)="addApplicant()">
+            <form [formGroup]="applicantForm" (ngSubmit)="addApplicant()">
             <div class="row">
               <h3 class="form-padding">Applicant</h3>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="before">Have you worked at MOTIVA before?</label>
-                   <select name="" id="" class="form-control">
+                  <label for="workbefore">Have you worked at MOTIVA before?</label>
+                   <select formControlName="workbefore" name="" id="" class="form-control" [(ngModel)]="applicant.workbefore" >
                       <option value="select">Select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>

@@ -14,7 +14,7 @@ export class HomeService {
     ) {}
 
 
-    getAllApplicants() {
+    getAllApplicants(): Observable<any> {
         return this._http.get(`${this.API}/applicants`)
         .map(res => res.json())
         .catch(this.handleError);
