@@ -1,4 +1,61 @@
-export interface HOME {
-    id: string;
-    
+export class HOME {
+    id?: string;
+    workbefore?: string;
+    payrange: string;
+    desposition: string;
+    name: string;
+    psourname: string;
+    msourname: string;
+    dob: Date;
+    age: number;
+    gender: string;
+    pofbirth: string;
+    nationality: string;
+    city: string;
+    state: string;
+    zipcode: number;
+    street: string;
+    streetNumber: string;
+    appartNumber: string;
+    homePhone: number;
+    mobileNumber: number;
+    secondaryPhone: string;
+    radio: string;
+    email: string;
+    relation: string;
+    spouseName: string;
+    childrens: string;
+    fatherName: string;
+    motherName: string;
+    emergencyContact: string;
+    relationshipContact: string;
+    relcontactPhone: string;
+    dependetYou: string;
+    timeResident: string;
+    education: string;
+    school: string;
+    graduationDate: string;
+    degree: string;
+    englishProficiency: string;
+    computerProficiency: string;
+    validVisa: string;
+    bodyTattos: string;
+    memberClub: string;
+    criminalRecord: string;
+    prisionMexico: string;
+    shift: string;
+    callWork: string;
+    nightShift: string;
+    refName: string;
+    refPhone: string;
+    refKnow: string;
+    refEmail: string;
+    workExperince: string;
+    companyName: string;
+    companyCountry: string;
+    companyDate: string;
+    leaveJob: string;
+    jobTitle: string;
+    supervisorName: string;
+
 }
