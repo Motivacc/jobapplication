@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "http-server",
-    "lint": "tslint \"src/**/*.ts\"",
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
     "test": "ng test",
-    "pree2e": "webdriver-manager update",
-    "e2e": "protractor",
-    "preinstall": "npm install -g http-server",
-    "postinstall": "ng build && mv dist/* ."
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +22,11 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "heroku-prebuild": "npm install -g http-server",
+    "heroku-postbuild": "ng build --prod",
+    "start": "http-server dist/"
+
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
