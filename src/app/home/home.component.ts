@@ -54,14 +54,19 @@ export class HomeComponent implements OnInit {
               (<FormGroup>this.applicantForm).setValue(applicants, { onlySelf: false});
             }
           }
-        )
+      )
+      this.initForm();  
      
   }
 
   initForm() {
-   this.applicantForm = this._fb.group({
-     workbefore: ['', Validators.required]
-   })
+  //  this.applicantForm = this._fb.group({
+  //    workbefore: ['', Validators.required]
+  //  })
+
+  this.applicantForm = new FormGroup({
+    workbefore: new FormControl()
+  })
   }
 
   getAll(){

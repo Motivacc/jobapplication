@@ -4,6 +4,9 @@
       <div class="col-md-12">
         <div class="text-center">
           <img src="../assets/img/logo.png" alt="">
+          <ul *ngFor="let appli of applicants">
+            <li> {{appli._id | json}}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -18,13 +21,13 @@
             <h3 >Job Application</h3>
           </div> 
           <div class="panel-body">
-            <form [formGroup]="applicantForm" (ngSubmit)="addApplicant()">
+            <form [formGroup]="applicantForm" novalidate (ngSubmit)="addApplicant(applicantForm.value,applicantForm.valid)">
             <div class="row">
               <h3 class="form-padding">Applicant</h3>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="workbefore">Have you worked at MOTIVA before?</label>
-                   <select formControlName="workbefore" name="" id="" class="form-control" [(ngModel)]="applicant.workbefore" >
+                   <select  name="" id="" class="form-control" formControlName="workbefore" >
                       <option value="select">Select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
@@ -35,7 +38,7 @@
               <div class="col-md-4">
                   <div class="form-group">
                     <label for="pay-range">Desire pay range?</label>
-                    <input type="text" class="form-control">
+                    <input  type="text" class="form-control" />
                   </div>
               </div>
 
