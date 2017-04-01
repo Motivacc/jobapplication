@@ -5,7 +5,8 @@
         <div class="text-center">
           <img src="../assets/img/logo.png" alt="">
           <ul *ngFor="let appli of applicants">
-            <li> {{appli._id | json}}</li>
+            <li> {{appli._id}}</li>
+            <li>{{appli.payrange}}</li>
           </ul>
         </div>
       </div>
@@ -21,13 +22,13 @@
             <h3 >Job Application</h3>
           </div> 
           <div class="panel-body">
-            <form [formGroup]="applicantForm" novalidate (ngSubmit)="addApplicant(applicantForm.value,applicantForm.valid)">
+            <form [formGroup]="applicantForm"  (ngSubmit)="submit()">
             <div class="row">
               <h3 class="form-padding">Applicant</h3>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="workbefore">Have you worked at MOTIVA before?</label>
-                   <select  name="" id="" class="form-control" formControlName="workbefore" >
+                   <select  name="" id="" class="form-control"  [(ngModel)]="applicants.workbefore" formControlName="workbefore" >
                       <option value="select">Select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
@@ -38,14 +39,14 @@
               <div class="col-md-4">
                   <div class="form-group">
                     <label for="pay-range">Desire pay range?</label>
-                    <input  type="text" class="form-control" />
+                    <input  type="text" class="form-control" [(ngModel)]="applicants.payrange" formControlName="payrange"/>
                   </div>
               </div>
 
                <div class="col-md-4">
                   <div class="form-group">
                     <label for="position">Desired Position</label>
-                    <select name="" id="" class="form-control">
+                    <select name="" id="" class="form-control" [(ngModel)]="applicants.desposition">
                       <option value="">Select</option>
                       <option value="">Costumer Service Representative</option>
                       <option value="">Spanish Costumer Service</option>
@@ -62,19 +63,19 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Name(s)</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.name">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Paternal Sourname</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.psourname">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Maternal Sourname</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.msourname">
                 </div>
               </div>
             </div>
@@ -83,19 +84,19 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Birthdate</label>
-                  <input type="date" class="form-control">
+                  <input type="date" class="form-control" [(ngModel)]="dob">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Age</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.age">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Gender</label>
-                  <select name="" id="" class="form-control">
+                  <select name="" id="" class="form-control" [(ngModel)]="applicants.gender">
                       <option value="">Select</option>
                       <option value="">Male</option>
                       <option value="">Female</option>
@@ -108,13 +109,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Place of Birth</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.pofbirth">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Nationality</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.nationality">
                 </div>
               </div>
             </div>
@@ -124,7 +125,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">City</label>
-                  <select name="" id="" class="form-control">
+                  <select name="" id="" class="form-control" [(ngModel)]="applicants.city">
                     <option value="">Select</option>
                     <option value="">Tijuana</option>
                   </select>
@@ -133,7 +134,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">State</label>
-                   <select name="" id="" class="form-control">
+                   <select name="" id="" class="form-control" [(ngModel)]="applicants.state">
                     <option value="">Select</option>
                     <option value="">Baja California</option>
                     <option value="">Sonora</option>
@@ -143,7 +144,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Zip Code</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.zipcode">
                 </div>
               </div>
             </div>
@@ -152,21 +153,21 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Street</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.street">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Street Number</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.streetNumber">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Int. App Number</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.appartNumber">
                   </div>
                 </div>
             </div>
@@ -175,21 +176,21 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Home Phone</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.homePhone">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Mobile Phone</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.mobilePhone">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Secondary Contact Phone</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.secondaryPhone">
                   </div>
                 </div>
             </div>
@@ -198,14 +199,14 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Radio</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.radio">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Email</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.email">
                   </div>
                 </div>
 
@@ -220,7 +221,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Relationship Status</label>
-                      <select name="" id="" class="form-control">
+                      <select name="" id="" class="form-control" [(ngModel)]="applicants.relation">
                         <option value="">Select</option>
                         <option value="">Single</option>
                         <option value="">Merried</option>
@@ -233,14 +234,14 @@
                  <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Spouse Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.spouseName">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Do you have Children, how many? </label>
-                    <select name="" id="" class="form-control">
+                    <select name="" id="" class="form-control" [(ngModel)]="applicants.childrens">
                       <option value="">1</option>
                       <option value="">2</option>
                       <option value="">3</option>
@@ -256,14 +257,14 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Father Name</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.fatherName">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Mother Name</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.motherName">
                   </div>
                 </div>
 
@@ -278,21 +279,21 @@
                 <div class="col-md-4">
                   <div class="form-group">
                         <label for="">Emergency Contact</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [(ngModel)]="applicants.emergencyContact">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Your relation with the contact?</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.relationshipContact">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="">Phone</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="applicants.relcontactPhone">
                   </div>
                 </div>
             </div>
@@ -301,14 +302,14 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Household members dependent on you?</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.dependentYou">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Time living in current residence?</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.timeResident">
                   </div>
                 </div>
 
@@ -324,21 +325,21 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">What is your Level of Education</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.edication">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                    <div class="form-group">
                       <label for="" style="font-size:9px;">In what school did you attend your highest level of education?</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.school">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                    <div class="form-group">
                       <label for="">Date</label>
-                      <input type="date" class="form-control">
+                      <input type="date" class="form-control" [(ngModel)]="applicants.graduationDate">
                   </div>
                 </div>
             </div>
@@ -347,21 +348,21 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Degree</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.degree">
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">English Proficiency</label>
-                <input type="text" class="form-control" placeholder="%">
+                <input type="text" class="form-control" placeholder="%" [(ngModel)]="englisProficiency">
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">English Writing Level</label>
-                <input type="text" class="form-control" placeholder="%">
+                <input type="text" class="form-control" placeholder="%" >
                 </div>
               </div>
             </div>
@@ -371,7 +372,7 @@
                <div class="col-md-4">
                <div class="form-group">
                   <label for="">Computer Proficency</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.computerProficiency">
                   <option value="">Select</option>
                   <option value="">Basic</option>
                   <option value="">Intermediated</option>
@@ -395,7 +396,7 @@
                <div class="col-md-4">
                 <div class="form-group">
                  <label for="">Do you have a valid VISA/Passport?</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.validVisa">
                   <option value="">Select</option>
                   <option value="">Yes</option>
                   <option value="">No</option>
@@ -407,7 +408,7 @@
               <div class="col-md-4">
               <div class="form-group">
                   <label for="">Do you have tattoos in your body?</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.bodyTattos">
                   <option value="">Select</option>
                   <option value="">Yes</option>
                   <option value="">No</option>
@@ -418,7 +419,7 @@
               <div class="col-md-4">
               <div class="form-group">
                  <label for=""style="font-size:9px;">Mention Clubs or Associations where you have been a member.</label>
-               <input type="text" class="form-control">
+               <input type="text" class="form-control" [(ngModel)]="applicants.memberClub">
               </div>
               </div>
             </div>
@@ -427,7 +428,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Do you have criminal Record?</label>
-                  <select name="" id="" class="form-control">
+                  <select name="" id="" class="form-control" [(ngModel)]="applicants.criminalRecord">
                     <option value="">Select</option>
                     <option value="">Yes</option>
                     <option value="">No</option>
@@ -437,7 +438,7 @@
               <div class="col-md-4">
                <div class="form-group">
                   <label for="">Have you ever been in prison in Mexico?</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.prisionMexico">
                     <option value="">Select</option>
                     <option value="">Yes</option>
                     <option value="">No</option>
@@ -454,7 +455,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Shift</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.shift">
                     <option value="">Select</option>
                     <option value="">Morning</option>
                     <option value="">Afternoon</option>
@@ -465,7 +466,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Are you availiable for on-call work?</label>
-                 <select name="" id="" class="form-control">
+                 <select name="" id="" class="form-control" [(ngModel)]="applicants.callWork">
                     <option value="">Select</option>
                     <option value="">Yes</option>
                     <option value="">No</option>
@@ -475,7 +476,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Are you availiable for night shift?</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.nightShift">
                     <option value="">Select</option>
                     <option value="">Yes</option>
                     <option value="">No</option>
@@ -489,7 +490,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Name</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.refName">
                 </div>
               </div>
               <div class="col-md-4">
@@ -501,7 +502,7 @@
               <div class="col-md-4">
                <div class="form-group">
                   <label for="">Phone</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.refPhone">
                </div>
               </div>
             </div>
@@ -510,13 +511,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">How long have you known this person? </label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.refKnow">
                 </div>
               </div>
               <div class="col-md-4">
                   <div class="forn-group">
                     <label for="">Email</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="applicants.refEmail">
                   </div>
               </div>
               <div class="col-md-4">
@@ -529,7 +530,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Work Experience</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="" class="form-control" [(ngModel)]="applicants.workExperience">
                    <option value="">Select</option>
                     <option value="">Yes</option>
                      <option value="">No</option>
@@ -542,7 +543,7 @@
               <div class="col-md-4">
                 <div class="from-group">
                   <label for="">Phone</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" >
                 </div>
               </div>
             </div>
@@ -551,19 +552,19 @@
               <div class="col-md-4">
                 <div class="from-group">
                   <label for="">Name of the company</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.cpmpanyName">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Country</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.companyCountry">
                 </div>
               </div>
               <div class="col-md-4">
                <div class="form-group">
                   <label for="">Date</label>
-                <input type="text" class="form-control">
+                <input type="date" class="form-control" [(ngModel)]="applicants.companyDate">
                </div>
               </div>
             </div>
@@ -572,19 +573,19 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Why did you leave your job</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.leaveJob">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="">Job Title</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.jobTitle">
                 </div>
               </div>
               <div class="col-md-4">
                <div class="form-group">
                   <label for="">Who was your supervisor?</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="applicants.supervisorName">
                </div>
               </div>
             </div>

@@ -20,12 +20,18 @@ export class HomeService {
         .catch(this.handleError);
     }
 
+    getApplicant(_id) {
+        return this._http.get(`${this.API}/applicants/`+_id)
+        .map(res => res.json())
+        .catch(this.handleError);
+    }
+
     addApplicants(applicant, isDelete = false) {
         let body = JSON.stringify(applicant);
         let headers = new Headers();
         let options = new RequestOptions({headers: headers});
         headers.append('Content-Type', 'application/json');
-        return this._http.post(`${this.API}/applicants`, body, options)
+        return this._http.post(`${this.API}/applicants`, options, body)
         .map(res => res.json())
         .catch(this.handleError);
     }

@@ -15,14 +15,15 @@ import { BasicValidators } from '../shared/basicValidators';
 export class HomeComponent implements OnInit {
   public applicantForm: FormGroup;
   public submitted: boolean;
+  responseStatus:Object= [];
   public applicants: HOME[]= [];
   public data: string;
-  public id: 0;
+  public _id: 0;
   public title: string;
 
-  applicant = new HOME();
+  applicant: HOME = new HOME();
   constructor(
-    private _fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router, 
     private _hService: HomeService,
@@ -32,41 +33,56 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params["id"];
-    })
-    if (this.id > 0) { 
-            this.title = "Edit Material"
-        } else {
-            this.title = "Add Material"
-        }
+    this.initForm();  
+    var _id = this.route.params.subscribe(params => {
+        var _id = params['_id'];
+        this.title = _id ? 'Edit Applicant' : 'New Applicant';
 
-        if (!this.id) {
-            return;
-        }
+        if(!_id)
+        return;
 
-        this._hService.getAllApplicants().subscribe(
-          applicants => {
-            this.applicants = applicants
+        this._hService.getApplicant(_id).subscribe(
+            applicant => this.applicant = applicant,
+            // response => {
+            //   if(response.status == 400){
+            //     this.router.navigate(['Not Found'])
+            //   }
+            // }
+        )
+    });
+    // this.sub = this.route.params.subscribe(params => {
+    //   this.id = params["id"];
+    // })
+    // if (this.id > 0) { 
+    //         this.title = "Edit Material"
+    //     } else {
+    //         this.title = "Add Material"
+    //     }
 
-            let Form = (this.applicantForm)
-            if (this.id > 0) {
-              (<FormGroup>this.applicantForm).setValue(applicants, { onlySelf: false});
-            }
-          }
-      )
-      this.initForm();  
+    //     if (!this.id) {
+    //         return;
+    //     }
+
+    //     this._hService.getAllApplicants().subscribe(
+    //       applicants => {
+    //         this.applicants = applicants
+
+    //         let Form = (this.applicantForm)
+    //         if (this.id > 0) {
+    //           (<FormGroup>this.applicantForm).setValue(applicants, { onlySelf: false});
+    //         }
+    //       }
+    //   );
      
   }
 
   initForm() {
-  //  this.applicantForm = this._fb.group({
-  //    workbefore: ['', Validators.required]
-  //  })
+   this.applicantForm = this.formBuilder.group({
+     workbefore: ['',  Validators.required],
+     payrange: ['', Validators.required]
+   })
 
-  this.applicantForm = new FormGroup({
-    workbefore: new FormControl()
-  })
+  
   }
 
   getAll(){
@@ -78,16 +94,24 @@ export class HomeComponent implements OnInit {
      )
   }
 
-  addApplicant(model: HOME, isValid: boolean) {
-    let result;
-      this._hService.addApplicants(model).subscribe(
-        data => {
-          if(data === 0) {
-            this.data = data;
-          }
-        }
-      )
-    console.log('Applicacion Enviada Exitorsamente!!! ...');
+  submit() {
+    this._hService.addApplicants(this.applicant).subscribe(
+      data => console.log(this.responseStatus = data),
+      err => console.log(err),
+      () => console.log('Applicacion Enviada Exitorsamente!!! ...')
+    )
   }
+
+  // addApplicant(model: HOME, isValid: boolean) {
+  //   let result;
+  //     this._hService.addApplicants(model).subscribe(
+  //       data => {
+  //         if(data === 0) {
+  //           this.data = data;
+  //         }
+  //       }
+  //     )
+  //   console.log('Applicacion Enviada Exitorsamente!!! ...');
+  // }
 
 }
