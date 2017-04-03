@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    this.initForm();  
+    this.initForm(); 
     var _id = this.route.params.subscribe(params => {
         var _id = params['_id'];
         this.title = _id ? 'Edit Applicant' : 'New Applicant';
@@ -42,34 +42,35 @@ export class HomeComponent implements OnInit {
         return;
 
         this._hService.getApplicant(_id).subscribe(
-            applicant => this.applicant = applicant,
-            // response => {
-            //   if(response.status == 400){
-            //     this.router.navigate(['Not Found'])
-            //   }
-            // }
+            applicant => this.applicants = applicant,
+            response => {
+              if(response.status == 400){
+                this.router.navigate(['Not Found'])
+              }
+            }
         )
     });
+
     // this.sub = this.route.params.subscribe(params => {
-    //   this.id = params["id"];
+    //   this._id = params["id"];
     // })
-    // if (this.id > 0) { 
+    // if (this._id > 0) { 
     //         this.title = "Edit Material"
     //     } else {
     //         this.title = "Add Material"
     //     }
 
-    //     if (!this.id) {
+    //     if (!this._id) {
     //         return;
     //     }
 
     //     this._hService.getAllApplicants().subscribe(
-    //       applicants => {
-    //         this.applicants = applicants
+    //       applicant => {
+    //         this.applicant = applicant
 
     //         let Form = (this.applicantForm)
-    //         if (this.id > 0) {
-    //           (<FormGroup>this.applicantForm).setValue(applicants, { onlySelf: false});
+    //         if (this._id > 0) {
+    //           (<FormGroup>this.applicantForm).setValue(applicant, { onlySelf: false});
     //         }
     //       }
     //   );
@@ -79,7 +80,64 @@ export class HomeComponent implements OnInit {
   initForm() {
    this.applicantForm = this.formBuilder.group({
      workbefore: ['',  Validators.required],
-     payrange: ['', Validators.required]
+     payrange: ['', Validators.required],
+     desposition: ['', Validators.required],
+     name: ['', Validators.required],
+     psourname: ['', Validators.required],
+     msourname: ['', Validators.required],
+     dob: ['', Validators.required],
+     age:  ['', Validators.required],
+     gender:  ['', Validators.required],
+     pofbirth:  ['', Validators.required],
+     nationality: ['', Validators.required],
+     city:  ['', Validators.required],
+     state:  ['', Validators.required],
+     zipcode:  ['', Validators.required],
+     street:  ['', Validators.required],
+     streetNumber:  ['', Validators.required],
+     appartNumber:  ['', Validators.required],
+     homePhone:  ['', Validators.required],
+     mobilePhone: ['', Validators.required],
+     radio:  ['', Validators.required],
+     email: ['', Validators.required],
+     relation:  ['', Validators.required],
+     spouseName:  ['', Validators.required],
+     childrens:  ['', Validators.required],
+     fatherName:  ['', Validators.required],
+     motherName:  ['', Validators.required],
+     emergencyContact:  ['', Validators.required],
+     relationshipContact:  ['', Validators.required],
+     relcontactPhone:  ['', Validators.required],
+     dependantYou:  ['', Validators.required],
+     timeResident:  ['', Validators.required],
+     education:  ['', Validators.required],
+     school:  ['', Validators.required],
+     graduationDate:  ['', Validators.required],
+     degree:  ['', Validators.required],
+     englishProficiency:  ['', Validators.required],
+     englishWriteLevel:  ['', Validators.required],
+     computerProficency: ['', Validators.required],
+     validVisa: ['', Validators.required],
+     bodyTattos: ['', Validators.required],
+     memberClub:  ['', Validators.required],
+     criminalRecord: ['', Validators.required],
+     prisionMexico:  ['', Validators.required],
+     shift:  ['', Validators.required],
+     callWork:  ['', Validators.required],
+     nightShift:  ['', Validators.required],
+     refName:  ['', Validators.required],
+     refOccupation:  ['', Validators.required],
+     refPhone:  ['', Validators.required],
+     refKnow:  ['', Validators.required],
+     refEmail:  ['', Validators.required],
+     workExperince:  ['', Validators.required],
+     companyName:  ['', Validators.required],
+     companyCountry:  ['', Validators.required],
+     companyDate:  ['', Validators.required],
+     leaveJob:  ['', Validators.required],
+     jobTitle:  ['', Validators.required],
+     supervisorName:  ['', Validators.required], 
+
    })
 
   
@@ -94,24 +152,21 @@ export class HomeComponent implements OnInit {
      )
   }
 
-  submit() {
+  submit(model: HOME) {
     this._hService.addApplicants(this.applicant).subscribe(
-      data => console.log(this.responseStatus = data),
+      (data:any) => {
+        console.log(data);      
+      },
+      
       err => console.log(err),
-      () => console.log('Applicacion Enviada Exitorsamente!!! ...')
+      () => {
+        console.log('Applicacion Enviada Exitorsamente!!! ...');
+        console.log(this.responseStatus = this.data)
+        console.log(this.applicant)
+      }
     )
   }
 
-  // addApplicant(model: HOME, isValid: boolean) {
-  //   let result;
-  //     this._hService.addApplicants(model).subscribe(
-  //       data => {
-  //         if(data === 0) {
-  //           this.data = data;
-  //         }
-  //       }
-  //     )
-  //   console.log('Applicacion Enviada Exitorsamente!!! ...');
-  // }
-
+  
+ 
 }
