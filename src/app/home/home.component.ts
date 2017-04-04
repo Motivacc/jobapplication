@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, Fo
 import {ActivatedRoute, Router, CanDeactivate } from '@angular/router';
 
 import { HomeService } from './home.service';
-import { HOME } from './home';
+import { Applicants } from './home';
 import { BasicValidators } from '../shared/basicValidators';
 
 // Sweet Alert
@@ -19,12 +19,11 @@ export class HomeComponent implements OnInit {
   public applicantForm: FormGroup;
   public submitted: boolean;
   responseStatus:Object= [];
-  public applicants: HOME[]= [];
+  public applicants: Applicants[] = [];
   public data: string;
   public _id: 0;
   public title: string;
-
-  applicant: HOME = new HOME();
+  public applicant;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -36,7 +35,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    this.initForm(); 
+    this.initForm();
+    this.applicant  = new Applicants( );
     var _id = this.route.params.subscribe(params => {
         var _id = params['_id'];
         this.title = _id ? 'Edit Applicant' : 'New Applicant';
@@ -53,31 +53,7 @@ export class HomeComponent implements OnInit {
             }
         )
     });
-
-    // this.sub = this.route.params.subscribe(params => {
-    //   this._id = params["id"];
-    // })
-    // if (this._id > 0) { 
-    //         this.title = "Edit Material"
-    //     } else {
-    //         this.title = "Add Material"
-    //     }
-
-    //     if (!this._id) {
-    //         return;
-    //     }
-
-    //     this._hService.getAllApplicants().subscribe(
-    //       applicant => {
-    //         this.applicant = applicant
-
-    //         let Form = (this.applicantForm)
-    //         if (this._id > 0) {
-    //           (<FormGroup>this.applicantForm).setValue(applicant, { onlySelf: false});
-    //         }
-    //       }
-    //   );
-     
+   
   }
 
   initForm() {
@@ -100,7 +76,7 @@ export class HomeComponent implements OnInit {
      streetNumber:  ['', Validators.required],
      appartNumber:  ['', Validators.required],
      homePhone:  ['', Validators.required],
-     mobilePhone: ['', Validators.required],
+     mobileNumber: ['', Validators.required],
      radio:  ['', Validators.required],
      email: ['', Validators.required],
      relation:  ['', Validators.required],
@@ -155,19 +131,28 @@ export class HomeComponent implements OnInit {
      )
   }
 
-  submit(model: HOME) {
-    this._hService.addApplicants(this.applicant).subscribe(
-      (data:any) => {
-        console.log(data);      
-      },
-      
-      err => console.log(err),
-      () => {
-        console.log('Applicacion Enviada Exitorsamente!!! ...');
-        console.log(this.responseStatus = this.data)
-        console.log(this.applicant)
-      }
+  
+
+  submit() {
+    this._hService.addApplicants(this.applicants).subscribe(
+        applicant => {
+          this.applicant = applicant;
+          console.log(applicant)
+        }
     )
+
+    // this._hService.addApplicants(this.applicant).subscribe(
+    //   (data:any) => {
+    //     console.log(data);      
+    //   },
+      
+    //   err => console.log(err),
+    //   () => {
+    //     console.log('Applicacion Enviada Exitorsamente!!! ...');
+    //     console.log(this.responseStatus = this.data)
+    //     console.log(this.applicants)
+    //   }
+    // )
   }
 
   

@@ -1,4 +1,4 @@
-export class HOME {
+export class Applicants {
     _id?: string;
     workbefore?: string;
     payrange: string;
@@ -6,19 +6,19 @@ export class HOME {
     name: string;
     psourname: string;
     msourname: string;
-    dob: Date;
-    age: number;
+    dob: string;
+    age: string;
     gender: string;
     pofbirth: string;
     nationality: string;
     city: string;
     state: string;
-    zipcode: number;
+    zipcode: string;
     street: string;
     streetNumber: string;
     appartNumber: string;
-    homePhone: number;
-    mobileNumber: number;
+    homePhone: string;
+    mobileNumber: string;
     secondaryPhone: string;
     radio: string;
     email: string;
@@ -30,13 +30,14 @@ export class HOME {
     emergencyContact: string;
     relationshipContact: string;
     relcontactPhone: string;
-    dependetYou: string;
+    dependentYou: string;
     timeResident: string;
     education: string;
     school: string;
     graduationDate: string;
     degree: string;
     englishProficiency: string;
+    englishWriteLevel: string;
     computerProficiency: string;
     validVisa: string;
     bodyTattos: string;
@@ -47,6 +48,7 @@ export class HOME {
     callWork: string;
     nightShift: string;
     refName: string;
+    refOccupation: string;
     refPhone: string;
     refKnow: string;
     refEmail: string;

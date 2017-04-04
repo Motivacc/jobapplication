@@ -18,7 +18,7 @@
             <h3 >Job Application</h3>
           </div> 
           <div class="panel-body">
-            <form [formGroup]="applicantForm"  (ngSubmit)="submit(this.applicantForm.value)">
+            <form [formGroup]="applicantForm"  (ngSubmit)="submit()">
             <div class="row">
               <h3 class="form-padding">Applicant</h3>
               <div class="col-md-4">
@@ -179,7 +179,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="">Mobile Phone</label>
-                      <input type="text" class="form-control" [(ngModel)]="applicants.mobilePhone" formControlName="mobilePhone">
+                      <input type="text" class="form-control" [(ngModel)]="applicants.mobilePhone" formControlName="mobileNumber">
                   </div>
                 </div>
 
