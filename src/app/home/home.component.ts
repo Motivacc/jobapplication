@@ -6,11 +6,14 @@ import { HomeService } from './home.service';
 import { HOME } from './home';
 import { BasicValidators } from '../shared/basicValidators';
 
+// Sweet Alert
+import { SweetAlertService } from 'ng2-sweetalert2';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HomeService, BasicValidators]
+  providers: [HomeService, BasicValidators, SweetAlertService]
 })
 export class HomeComponent implements OnInit {
   public applicantForm: FormGroup;
